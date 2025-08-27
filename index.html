@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dinóka — Official</title>
+  <meta name="description" content="Dinóka streamer/tiktoker — menetrend, gép specifikáció, közösségi linkek." />
+  <meta name="theme-color" content="#00ff88" />
+  <!-- Google Font (változtatható) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* ====== Alap reset & változók ====== */
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --bg:#0b0f0c;          /* háttér */
+      --panel:#0f1512;       /* kártyák */
+      --panel-2:#121a16;     /* mélyebb kártyák */
+      --text:#e6ffe6;        /* fő szöveg */
+      --muted:#9ae6b4;       /* halvány szöveg */
+      --accent:#00ff88;      /* neon zöld */
+      --accent-2:#5cffd5;    /* világosabb árnyalat */
+      --danger:#ff3b3b;      /* figyelem */
+      --radius:20px;
+      --shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      color:var(--text); background:radial-gradient(1200px 800px at 10% -20%, rgba(0,255,136,.15), transparent 50%),
+                         radial-gradient(900px 600px at 90% 10%, rgba(92,255,213,.12), transparent 40%),
+                         linear-gradient(180deg, #08100c 0%, #0b0f0c 60%, #080b0a 100%);
+      min-height:100dvh; overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+
+    /* ====== Navigáció ====== */
+    .nav{
+      position:sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+      background:linear-gradient(180deg, rgba(12,18,15,.8), rgba(12,18,15,.5));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav .wrap{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 18px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px; font-size:1.05rem}
+    .brand .logo{width:34px; height:34px; display:grid; place-items:center; border-radius:12px; background:linear-gradient(135deg, rgba(0,255,136,.25), rgba(92,255,213,.15)); box-shadow: inset 0 0 12px rgba(0,255,136,.35), 0 8px 20px rgba(0,0,0,.35)}
+    .brand .logo svg{width:20px; height:20px; transform: translateY(1px)}
+    .nav a.link{opacity:.9; padding:10px 12px; border-radius:12px; transition: .2s ease}
+    .nav a.link:hover{background:rgba(255,255,255,.06); opacity:1}
+    .links{display:flex; gap:2px}
+
+    /* ====== Hero ====== */
+    .hero{position:relative; isolation:isolate}
+    .hero .wrap{max-width:1100px; margin:0 auto; padding:80px 18px 40px; display:grid; gap:28px; grid-template-columns:1.2fr .8fr; align-items:center}
+    @media (max-width:900px){.hero .wrap{grid-template-columns:1fr; padding-top:60px}}
+    .kicker{font-size:.9rem; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; opacity:.85}
+    .hero h1{font-size:clamp(2.1rem, 4vw + .5rem, 4rem); margin:6px 0 10px; line-height:1.05}
+    .hero p{color:#d6fbe2; opacity:.85; max-width:58ch}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px}
+    .btn{padding:12px 16px; border-radius:14px; font-weight:600; display:inline-flex; align-items:center; gap:10px; border:1px solid rgba(255,255,255,.1); box-shadow:var(--shadow); transition:transform .15s ease, box-shadow .2s ease, background .2s ease}
+    .btn.primary{background:linear-gradient(135deg, rgba(0,255,136,.22), rgba(92,255,213,.18));}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 16px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.05)}
+
+    /* Dekor: pulzáló glória */
+    .glow{position:absolute; inset:auto -10% -25% -10%; height:420px; filter:blur(60px); opacity:.75; z-index:-1;
+      background: radial-gradient(40% 70% at 30% 50%, rgba(0,255,136,.35), transparent 60%),
+                  radial-gradient(40% 70% at 70% 50%, rgba(92,255,213,.28), transparent 60%);
+      mask: linear-gradient(180deg, black 35%, transparent 100%);
+    }
+
+    /* ====== Közösségi ikonok ====== */
+    .socials{display:flex; gap:12px; margin-top:8px}
+    .social-btn{--ring: rgba(0,255,136,.22); width:46px; height:46px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(18,26,22,.9), rgba(14,20,18,.9)); border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 20px rgba(0,0,0,.35), 0 0 0 0 var(--ring); transition:.2s ease}
+    .social-btn:hover{transform: translateY(-1px) scale(1.03); box-shadow:0 10px 28px rgba(0,0,0,.5), 0 0 0 10px var(--ring)}
+    .social-btn svg{width:22px; height:22px; opacity:.95}
+    .social-btn[aria-label~="TikTok"] svg path{fill:#fff}
+
+    /* ====== Szekciók ====== */
+    section{scroll-margin-top:80px}
+    .section{max-width:1100px; margin:0 auto; padding:42px 18px}
+    .section h2{font-size:1.8rem; margin:0 0 16px; letter-spacing:.2px}
+    .section .sub{color:var(--muted); margin-top:-6px; margin-bottom:20px}
+
+    /* ====== Menetrend ====== */
+    .schedule-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:12px}
+    @media (max-width:1000px){.schedule-grid{grid-template-columns:repeat(4,1fr)}}
+    @media (max-width:640px){.schedule-grid{grid-template-columns:repeat(2,1fr)}}
+    .day-card{background:linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:14px; box-shadow:var(--shadow); position:relative; overflow:hidden}
+    .day-name{font-weight:700; letter-spacing:.3px; margin-bottom:6px}
+    .time{opacity:.9}
+    .off{opacity:.6; font-style:italic}
+    .today{outline:2px solid rgba(0,255,136,.35); box-shadow:0 0 0 6px rgba(0,255,136,.08) inset}
+    .badge-live{position:absolute; top: 80px; right:5px; padding:4px 8px; border-radius:999px; background:linear-gradient(135deg, rgba(0,255,136,.25), rgba(92,255,213,.2)); border:1px solid rgba(255,255,255,.12); font-size:.75rem; font-weight:700; letter-spacing:.3px}
+
+    /* ====== Specifikáció ====== */
+    .specs{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+    @media (max-width:800px){.specs{grid-template-columns:1fr}}
+    .spec{background:linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow)}
+    .spec .label{font-size:.95rem; color:var(--muted); margin-bottom:6px; letter-spacing:.2px}
+    .spec .value{font-weight:700; font-size:1.05rem}
+
+    /* ====== Lábléc ====== */
+    footer{border-top:1px solid rgba(255,255,255,.06); margin-top:40px; background:linear-gradient(180deg, rgba(12,18,15,.6), rgba(12,18,15,.9))}
+    .footer-wrap{max-width:1100px; margin:0 auto; padding:22px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap}
+    .small{color:var(--muted)}
+
+    /* ====== Animációk ====== */
+    .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.revealed{opacity:1; transform:none}
+  </style>
+</head>
+<body>
+  <!-- ======= NAV ======= -->
+  <nav class="nav">
+    <div class="wrap">
+      <a href="#home" class="brand" aria-label="Dinóka — kezdőlap">
+          <span class="logo" aria-hidden="true" style="background:none; box-shadow:none; padding:0;">
+            <img src="dino.png" alt="Dinóka logó" style="width:34px; height:34px; border-radius:8px; object-fit:cover;">
+            </span>
+        DINÓKA
+      </a>
+      <div class="links">
+        <a class="link" href="#menetrend">Menetrend</a>
+        <a class="link" href="#specs">Gép</a>
+        <a class="link" href="#kozosseg">Közösség</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======= HERO ======= -->
+  <header id="home" class="hero">
+    <div class="wrap">
+      <div class="text reveal">
+        <div class="kicker">Dínós vibe • gamer</div>
+        <h1>Üdv a Dinóka fészkében 🦖</h1>
+        <p>Stream, TikTok, YouTube — minden ami dinos. Nézd a live-ot, csatlakozz a közösséghez, és less be a gépem belsejébe is!</p>
+        <div class="cta">
+          <a class="btn primary" href="#menetrend">Nézd a menetrendet</a>
+          <a class="btn" href="#kozosseg">Kövess & csatlakozz</a>
+        </div>
+        <div class="socials" style="margin-top:18px">
+          <!-- TODO: Cseréld a # linkeket a saját profil URL-jeidre -->
+          <a class="social-btn" aria-label="TikTok" href="#" target="_blank" rel="noopener">
+            <!-- TikTok -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M16 6.245A5.78 5.78 0 0 0 16.58 9c2.46 1.77 4.42 1.93 4.42 1.93v3.06s-2.26-.05-4.41-1.3v3.85c0 3.8-3 6.91-6.91 6.91S2.77 20.4 2.77 16.59 5.88 9.68 9.69 9.68c.34 0 .67.03 1 .08v3.5a3.56 3.56 0 1 0 2.53 3.4V1h2.78S15.84 3.59 16 6.245Z" fill="#fff"/>
+            </svg>
+          </a>
+          <a class="social-btn" aria-label="Instagram" href="#" target="_blank" rel="noopener">
+            <!-- Instagram -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.06 1.97.24 2.67.51.73.28 1.35.66 1.97 1.28.62.62 1 1.24 1.28 1.97.27.7.45 1.5.51 2.67.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.06 1.17-.24 1.97-.51 2.67a4.86 4.86 0 0 1-1.28 1.97 4.86 4.86 0 0 1-1.97 1.28c-.7.27-1.5.45-2.67.51-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.06-1.97-.24-2.67-.51a4.86 4.86 0 0 1-1.97-1.28 4.86 4.86 0 0 1-1.28-1.97c-.27-.7-.45-1.5-.51-2.67C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.06-1.17.24-1.97.51-2.67.28-.73.66-1.35 1.28-1.97.62-.62 1.24-1 1.97-1.28.7-.27 1.5-.45 2.67-.51C8.42 2.21 8.8 2.2 12 2.2Zm0 1.8c-3.15 0-3.52.01-4.76.07-.98.05-1.52.21-1.87.35-.47.18-.81.4-1.17.76-.36.36-.58.7-.76 1.17-.14.35-.3.89-.35 1.87-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.05.98.21 1.52.35 1.87.18.47.4.81.76 1.17.36.36.7.58 1.17.76.35.14.89.3 1.87.35 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.98-.05 1.52-.21 1.87-.35.47-.18.81-.4 1.17-.76.36-.36.58-.7.76-1.17.14-.35.3-.89.35-1.87.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.05-.98-.21-1.52-.35-1.87a3.07 3.07 0 0 0-.76-1.17 3.07 3.07 0 0 0-1.17-.76c-.35-.14-.89-.3-1.87-.35-1.24-.06-1.61-.07-4.76-.07Zm0 3.2a6.8 6.8 0 1 1 0 13.6 6.8 6.8 0 0 1 0-13.6Zm0 1.8a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.2-2.7a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Z" fill="currentColor"/>
+            </svg>
+          </a>
+          <a class="social-btn" aria-label="YouTube" href="#" target="_blank" rel="noopener">
+            <!-- YouTube -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M23.5 6.2a4.28 4.28 0 0 0-3-3C18.76 2.7 12 2.7 12 2.7s-6.76 0-8.5.5a4.28 4.28 0 0 0-3 3C0 8 0 12 0 12s0 4 .5 5.8a4.28 4.28 0 0 0 3 3c1.74.5 8.5.5 8.5.5s6.76 0 8.5-.5a4.28 4.28 0 0 0 3-3C24 16 24 12 24 12s0-4-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z" fill="currentColor"/>
+            </svg>
+          </a>
+          <a class="social-btn" aria-label="Discord" href="#" target="_blank" rel="noopener">
+            <!-- Discord -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M20.3 4.4A18 18 0 0 0 15.6 3l-.27.5A17.8 17.8 0 0 1 12 3c-1.1 0-2.2.1-3.3.3L8.4 3A18 18 0 0 0 3.7 4.4C2 7 1.5 9.6 1.6 12.2c1.2 1.5 2.9 2.6 4.8 3.3.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.8-.8l.45-.33c3.5 1.6 7.4 1.6 10.9 0l.45.33c-.6.33-1.2.6-1.8.8.3.7.7 1.3 1.1 1.9 1.9-.7 3.6-1.8 4.8-3.3.2-2.7-.3-5.2-1.9-7.8ZM9.7 13.9c-.9 0-1.6-.84-1.6-1.88 0-1.03.7-1.87 1.6-1.87.9 0 1.6.84 1.6 1.87 0 1.04-.7 1.88-1.6 1.88Zm4.6 0c-.9 0-1.6-.84-1.6-1.88 0-1.03.7-1.87 1.6-1.87.9 0 1.6.84 1.6 1.87 0 1.04-.7 1.88-1.6 1.88Z" fill="currentColor"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="art reveal" aria-hidden="true">
+      <img src="dino.png" alt="Dinóka"
+           style="
+             max-width:580px;
+             width:100%;
+             object-fit:cover;
+             transform: perspective(1200px) rotateY(-20deg) rotateX(5deg);
+             transition: transform .6s ease;
+           "
+           onmouseover="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05)';"
+           onmouseout="this.style.transform='perspective(1000px) rotateY(-10deg) rotateX(5deg)';"
+      >
+    </div>
+  </div>
+</header>
+
+  <!-- ======= MENETREND ======= -->
+  <section id="menetrend" class="section">
+    <h2 class="reveal">Menetrend</h2>
+    <p class="sub reveal">(Szerkeszthető minta — írd át a napokat/időket a saját beosztásodra.)</p>
+    <div class="schedule-grid">
+      <!--
+        Tipp: ha pihenőnap, add a .off osztályt a .time elemre
+        Az aktuális napot a script automatikusan kiemeli (.today class)
+      -->
+      <article class="day-card reveal" data-day="3"><div class="day-name">Hétfő</div><div class="time">12:00-14:00 • Gameplay</div></article>
+      <article class="day-card reveal" data-day="3"><div class="day-name">Kedd</div><div class="time">12:00–15:00 • Just Chatting / Gameplay</div></article>
+      <article class="day-card reveal" data-day="3"><div class="day-name">Szerda</div><div class="time">12:00 –14:00 • Gameplay</div></article>
+      <article class="day-card reveal" data-day="3"><div class="day-name">Csütörtök</div><div class="time">12:00-14:00 • Gameplay </div></article>
+      <article class="day-card reveal" data-day="3"><div class="day-name">Péntek</div><div class="time">12:00–15:00 • Gameplay</div></article>
+      <article class="day-card reveal" data-day="6"><div class="day-name">Szombat</div><div class="time off">Pihenő</div><span class="badge-live">OFF</span></article>
+      <article class="day-card reveal" data-day="7"><div class="day-name">Vasárnap</div><div class="time off">Pihenő</div><span class="badge-live">OFF</span></article>
+    </div>
+  </section>
+
+  <!-- ======= GÉP SPECIFIKÁCIÓ ======= -->
+  <section id="specs" class="section">
+    <h2 class="reveal">Gép specifikáció</h2>
+    <p class="sub reveal">(Mintaértékek — cseréld a sajátodra.)</p>
+    <div class="specs">
+      <div class="spec reveal"><div class="label">CPU</div><div class="value">Intel i7-14700</div></div>
+      <div class="spec reveal"><div class="label">GPU</div><div class="value">Geforce RTX 4060 8GB</div></div>
+      <div class="spec reveal"><div class="label">RAM</div><div class="value">2x16GB DDR4</div></div>
+      <div class="spec reveal"><div class="label">Tárhely</div><div class="value">1TB M.2 SSD 7000/6000 MB/s</div></div>
+      <div class="spec reveal"><div class="label">Alaplap</div><div class="value">Gigabyte B760M Gaming</div></div>
+      <div class="spec reveal"><div class="label">Tápegység</div><div class="value">650W Gold semi-modular</div></div>
+      <div class="spec reveal"><div class="label">Monitor</div><div class="value">32" AOC G32 / 24" AOC C24</div></div>
+      <div class="spec reveal"><div class="label">Perifériák</div><div class="value">Logitech G502X  / Logitech G713</div></div>
+    </div>
+  </section>
+
+  <!-- ======= KÖZÖSSÉG / LINKEK ======= -->
+  <section id="kozosseg" class="section">
+    <h2 class="reveal">Közösség & linkek</h2>
+    <p class="sub reveal">Kövesd a platformokon, és csatlakozz a Discordhoz!</p>
+    <div class="socials reveal">
+      <!-- Ugyanazok az ikonok, hogy itt is kézre essen -->
+      <a class="social-btn" aria-label="TikTok" href="#" target="_blank" rel="noopener" title="TikTok">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 6.245A5.78 5.78 0 0 0 16.58 9c2.46 1.77 4.42 1.93 4.42 1.93v3.06s-2.26-.05-4.41-1.3v3.85c0 3.8-3 6.91-6.91 6.91S2.77 20.4 2.77 16.59 5.88 9.68 9.69 9.68c.34 0 .67.03 1 .08v3.5a3.56 3.56 0 1 0 2.53 3.4V1h2.78S15.84 3.59 16 6.245Z" fill="#fff"/></svg>
+      </a>
+      <a class="social-btn" aria-label="Instagram" href="#" target="_blank" rel="noopener" title="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.06 1.97.24 2.67.51.73.28 1.35.66 1.97 1.28.62.62 1 1.24 1.28 1.97.27.7.45 1.5.51 2.67.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.06 1.17-.24 1.97-.51 2.67a4.86 4.86 0 0 1-1.28 1.97 4.86 4.86 0 0 1-1.97 1.28c-.7.27-1.5.45-2.67.51-1.27.06-1.65.07-4.85.07s-3.52-.01-4.76-.07c-.98-.05-1.52-.21-1.87-.35-.47-.18-.81-.4-1.17-.76-.36-.36-.58-.7-.76-1.17-.14-.35-.3-.89-.35-1.87-.06-1.24-.07-1.61-.07-4.76s.01-3.52.07-4.76c.05-.98.21-1.52.35-1.87.18-.47.4-.81.76-1.17.36-.36.7-.58 1.17-.76.35-.14.89-.3 1.87-.35 1.24-.06 1.61-.07 4.76-.07Zm0 3.2a6.8 6.8 0 1 1 0 13.6 6.8 6.8 0 0 1 0-13.6Zm0 1.8a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.2-2.7a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Z" fill="currentColor"/></svg>
+      </a>
+      <a class="social-btn" aria-label="YouTube" href="#" target="_blank" rel="noopener" title="YouTube">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M23.5 6.2a4.28 4.28 0 0 0-3-3C18.76 2.7 12 2.7 12 2.7s-6.76 0-8.5.5a4.28 4.28 0 0 0-3 3C0 8 0 12 0 12s0 4 .5 5.8a4.28 4.28 0 0 0 3 3c1.74.5 8.5.5 8.5.5s6.76 0 8.5-.5a4.28 4.28 0 0 0 3-3C24 16 24 12 24 12s0-4-.5-5.8ZM9.6 15.5v-7l6.2 3.5-6.2 3.5Z" fill="currentColor"/></svg>
+      </a>
+      <a class="social-btn" aria-label="Discord" href="#" target="_blank" rel="noopener" title="Discord">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.3 4.4A18 18 0 0 0 15.6 3l-.27.5A17.8 17.8 0 0 1 12 3c-1.1 0-2.2.1-3.3.3L8.4 3A18 18 0 0 0 3.7 4.4C2 7 1.5 9.6 1.6 12.2c1.2 1.5 2.9 2.6 4.8 3.3.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.8-.8l.45-.33c3.5 1.6 7.4 1.6 10.9 0l.45.33c-.6.33-1.2.6-1.8.8.3.7.7 1.3 1.1 1.9 1.9-.7 3.6-1.8 4.8-3.3.2-2.7-.3-5.2-1.9-7.8ZM9.7 13.9c-.9 0-1.6-.84-1.6-1.88 0-1.03.7-1.87 1.6-1.87.9 0 1.6.84 1.6 1.87 0 1.04-.7 1.88-1.6 1.88Zm4.6 0c-.9 0-1.6-.84-1.6-1.88 0-1.03.7-1.87 1.6-1.87.9 0 1.6.84 1.6 1.87 0 1.04-.7 1.88-1.6 1.88Z" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-wrap">
+      <span class="small">© <span id="year"></span> Dinóka — Minden jog fenntartva.</span>
+      <span class="small">Készítette: <strong>Dinóka</strong> & társai</span>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Kiemelés: mai nap a menetrendben =====
+    (function(){
+      const today = new Date().getDay(); // 0-Vas,1-Hétfő...
+      document.querySelectorAll('.day-card').forEach(card=>{
+        const d = Number(card.getAttribute('data-day'));
+        if (d === today) card.classList.add('today');
+      });
+    })();
+
+    // ===== Scroll-reveal animáció =====
+    (function(){
+      const obs = new IntersectionObserver((entries)=>{
+        for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('revealed'); obs.unobserve(e.target);} }
+      },{threshold:0.1});
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    })();
+
+    // ===== Év frissítése a láblécben =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
