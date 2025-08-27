@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dinóka — Official</title>
-  <meta name="description" content="Dinóka streamer/tiktoker — menetrend, gép specifikáció, közösségi linkek." />
+  <title>Dinoka — Official</title>
+  <meta name="description" content="Dinoka streamer/tiktoker — menetrend, gép specifikáció, közösségi linkek." />
   <meta name="theme-color" content="#00ff88" />
   <!-- Google Font (változtatható) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,6 +61,10 @@
     .btn.primary{background:linear-gradient(135deg, rgba(0,255,136,.22), rgba(92,255,213,.18));}
     .btn:hover{transform:translateY(-1px); box-shadow:0 16px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.05)}
 
+    /* Dinó hero kép (3D hatás) */
+    .hero-img{max-width:580px; width:100%; object-fit:cover; transform:perspective(1200px) rotateY(-20deg) rotateX(5deg); transition:transform .6s ease}
+    .hero-img:hover{transform:perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05)}
+
     /* Dekor: pulzáló glória */
     .glow{position:absolute; inset:auto -10% -25% -10%; height:420px; filter:blur(60px); opacity:.75; z-index:-1;
       background: radial-gradient(40% 70% at 30% 50%, rgba(0,255,136,.35), transparent 60%),
@@ -69,7 +73,7 @@
     }
 
     /* ====== Közösségi ikonok ====== */
-    .socials{display:flex; gap:12px; margin-top:8px}
+    .socials{display:flex; gap:12px; margin-top:8px; flex-wrap:wrap}
     .social-btn{--ring: rgba(0,255,136,.22); width:46px; height:46px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(18,26,22,.9), rgba(14,20,18,.9)); border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 20px rgba(0,0,0,.35), 0 0 0 0 var(--ring); transition:.2s ease}
     .social-btn:hover{transform: translateY(-1px) scale(1.03); box-shadow:0 10px 28px rgba(0,0,0,.5), 0 0 0 10px var(--ring)}
     .social-btn svg{width:22px; height:22px; opacity:.95}
@@ -84,13 +88,13 @@
     /* ====== Menetrend ====== */
     .schedule-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:12px}
     @media (max-width:1000px){.schedule-grid{grid-template-columns:repeat(4,1fr)}}
-    @media (max-width:640px){.schedule-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.schedule-grid{grid-template-columns:1fr}}
     .day-card{background:linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:14px; box-shadow:var(--shadow); position:relative; overflow:hidden}
     .day-name{font-weight:700; letter-spacing:.3px; margin-bottom:6px}
     .time{opacity:.9}
     .off{opacity:.6; font-style:italic}
     .today{outline:2px solid rgba(0,255,136,.35); box-shadow:0 0 0 6px rgba(0,255,136,.08) inset}
-    .badge-live{position:absolute; top: 80px; right:5px; padding:4px 8px; border-radius:999px; background:linear-gradient(135deg, rgba(0,255,136,.25), rgba(92,255,213,.2)); border:1px solid rgba(255,255,255,.12); font-size:.75rem; font-weight:700; letter-spacing:.3px}
+    .badge-live{position:absolute; top:10px; right:10px; padding:4px 8px; border-radius:999px; background:linear-gradient(135deg, rgba(0,255,136,.25), rgba(92,255,213,.2)); border:1px solid rgba(255,255,255,.12); font-size:.75rem; font-weight:700; letter-spacing:.3px}
 
     /* ====== Specifikáció ====== */
     .specs{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
@@ -107,17 +111,39 @@
     /* ====== Animációk ====== */
     .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
     .reveal.revealed{opacity:1; transform:none}
+
+    /* ====== Mobil finomhangolás ====== */
+    @media (max-width:900px){
+      .hero .wrap{gap:18px; padding:56px 16px 28px}
+      .hero h1{font-size:clamp(1.9rem, 5vw + .2rem, 2.7rem)}
+      .btn{padding:10px 12px}
+      .social-btn{width:40px; height:40px; border-radius:12px}
+    }
+    @media (max-width:600px){
+      .nav .wrap{padding:12px 14px}
+      .brand{gap:8px; font-size:1rem}
+      .brand .logo img{width:30px; height:30px; border-radius:8px}
+      .hero-img{transform:none !important; max-width:100%}
+    }
   </style>
 </head>
 <body>
   <!-- ======= NAV ======= -->
   <nav class="nav">
     <div class="wrap">
-      <a href="#home" class="brand" aria-label="Dinóka — kezdőlap">
-          <span class="logo" aria-hidden="true" style="background:none; box-shadow:none; padding:0;">
-            <img src="dino.png" alt="Dinóka logó" style="width:34px; height:34px; border-radius:8px; object-fit:cover;">
-            </span>
-        DINÓKA
+      <a href="#home" class="brand" aria-label="Dinoka — kezdőlap">
+        <span class="logo" aria-hidden="true">
+          <!-- Mini dinoszaurusz ikon -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M7 14c0-1.657 2.343-3 6-3 1.657 0 3-1.343 3-3V6h2V4h-2V2h-2v2H9a4 4 0 0 0-4 4v2H3v2h2v5a3 3 0 0 0 3 3h2v-2H8a1 1 0 0 1-1-1v-3z" fill="url(#g)"/>
+            <defs>
+              <linearGradient id="g" x1="0" x2="24" y1="0" y2="24" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00ff88"/><stop offset="1" stop-color="#5cffd5"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        DINOKA
       </a>
       <div class="links">
         <a class="link" href="#menetrend">Menetrend</a>
@@ -131,8 +157,8 @@
   <header id="home" class="hero">
     <div class="wrap">
       <div class="text reveal">
-        <div class="kicker">Dínós vibe • gamer</div>
-        <h1>Üdv a Dinóka fészkében 🦖</h1>
+        <div class="kicker">Dínós vibe • gamer/IRL</div>
+        <h1>Üdv a Dinoka fészkében 🦖</h1>
         <p>Stream, TikTok, YouTube — minden ami dinos. Nézd a live-ot, csatlakozz a közösséghez, és less be a gépem belsejébe is!</p>
         <div class="cta">
           <a class="btn primary" href="#menetrend">Nézd a menetrendet</a>
@@ -167,20 +193,11 @@
         </div>
       </div>
       <div class="art reveal" aria-hidden="true">
-      <img src="dino.png" alt="Dinóka"
-           style="
-             max-width:580px;
-             width:100%;
-             object-fit:cover;
-             transform: perspective(1200px) rotateY(-20deg) rotateX(5deg);
-             transition: transform .6s ease;
-           "
-           onmouseover="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05)';"
-           onmouseout="this.style.transform='perspective(1000px) rotateY(-10deg) rotateX(5deg)';"
-      >
+      <img src="dino.png" alt="Dinóka" class="hero-img">
+      </div>
+      <div class="glow"></div>
     </div>
-  </div>
-</header>
+  </header>
 
   <!-- ======= MENETREND ======= -->
   <section id="menetrend" class="section">
@@ -191,13 +208,13 @@
         Tipp: ha pihenőnap, add a .off osztályt a .time elemre
         Az aktuális napot a script automatikusan kiemeli (.today class)
       -->
-      <article class="day-card reveal" data-day="3"><div class="day-name">Hétfő</div><div class="time">12:00-14:00 • Gameplay</div></article>
-      <article class="day-card reveal" data-day="3"><div class="day-name">Kedd</div><div class="time">12:00–15:00 • Just Chatting / Gameplay</div></article>
-      <article class="day-card reveal" data-day="3"><div class="day-name">Szerda</div><div class="time">12:00 –14:00 • Gameplay</div></article>
-      <article class="day-card reveal" data-day="3"><div class="day-name">Csütörtök</div><div class="time">12:00-14:00 • Gameplay </div></article>
-      <article class="day-card reveal" data-day="3"><div class="day-name">Péntek</div><div class="time">12:00–15:00 • Gameplay</div></article>
-      <article class="day-card reveal" data-day="6"><div class="day-name">Szombat</div><div class="time off">Pihenő</div><span class="badge-live">OFF</span></article>
-      <article class="day-card reveal" data-day="7"><div class="day-name">Vasárnap</div><div class="time off">Pihenő</div><span class="badge-live">OFF</span></article>
+      <article class="day-card reveal" data-day="1"><div class="day-name">Hétfő</div><div class="time off">Pihenő</div></article>
+      <article class="day-card reveal" data-day="2"><div class="day-name">Kedd</div><div class="time">18:00–21:00 • Just Chatting / IRL</div></article>
+      <article class="day-card reveal" data-day="3"><div class="day-name">Szerda</div><div class="time">19:00–22:00 • Gameplay</div></article>
+      <article class="day-card reveal" data-day="4"><div class="day-name">Csütörtök</div><div class="time off">Pihenő</div></article>
+      <article class="day-card reveal" data-day="5"><div class="day-name">Péntek</div><div class="time">18:30–23:00 • Community Night</div><span class="badge-live">LIVE</span></article>
+      <article class="day-card reveal" data-day="6"><div class="day-name">Szombat</div><div class="time">16:00–20:00 • Különkiadás</div></article>
+      <article class="day-card reveal" data-day="0"><div class="day-name">Vasárnap</div><div class="time off">Pihenő</div></article>
     </div>
   </section>
 
@@ -206,14 +223,14 @@
     <h2 class="reveal">Gép specifikáció</h2>
     <p class="sub reveal">(Mintaértékek — cseréld a sajátodra.)</p>
     <div class="specs">
-      <div class="spec reveal"><div class="label">CPU</div><div class="value">Intel i7-14700</div></div>
-      <div class="spec reveal"><div class="label">GPU</div><div class="value">Geforce RTX 4060 8GB</div></div>
-      <div class="spec reveal"><div class="label">RAM</div><div class="value">2x16GB DDR4</div></div>
-      <div class="spec reveal"><div class="label">Tárhely</div><div class="value">1TB M.2 SSD 7000/6000 MB/s</div></div>
-      <div class="spec reveal"><div class="label">Alaplap</div><div class="value">Gigabyte B760M Gaming</div></div>
-      <div class="spec reveal"><div class="label">Tápegység</div><div class="value">650W Gold semi-modular</div></div>
-      <div class="spec reveal"><div class="label">Monitor</div><div class="value">32" AOC G32 / 24" AOC C24</div></div>
-      <div class="spec reveal"><div class="label">Perifériák</div><div class="value">Logitech G502X  / Logitech G713</div></div>
+      <div class="spec reveal"><div class="label">CPU</div><div class="value">AMD Ryzen 7 5800X3D</div></div>
+      <div class="spec reveal"><div class="label">GPU</div><div class="value">NVIDIA GeForce RTX 4070 Ti SUPER 12GB</div></div>
+      <div class="spec reveal"><div class="label">RAM</div><div class="value">32GB DDR4 3600MHz</div></div>
+      <div class="spec reveal"><div class="label">Tárhely</div><div class="value">1TB NVMe SSD + 2TB HDD</div></div>
+      <div class="spec reveal"><div class="label">Alaplap</div><div class="value">MSI MAG B550 Tomahawk</div></div>
+      <div class="spec reveal"><div class="label">Ház & hűtés</div><div class="value">NZXT H5 Flow + 240mm AIO</div></div>
+      <div class="spec reveal"><div class="label">Monitor</div><div class="value">27” 1440p 165Hz IPS</div></div>
+      <div class="spec reveal"><div class="label">Perifériák</div><div class="value">HyperX Cloud II • Glorious Model O • Keychron K2</div></div>
     </div>
   </section>
 
@@ -240,8 +257,8 @@
 
   <footer>
     <div class="footer-wrap">
-      <span class="small">© <span id="year"></span> Dinóka — Minden jog fenntartva.</span>
-      <span class="small">Készítette: <strong>Dinóka</strong> & társai</span>
+      <span class="small">© <span id="year"></span> Dinoka — Minden jog fenntartva.</span>
+      <span class="small">Készítette: <strong>Dinoka</strong> & társai</span>
     </div>
   </footer>
 
